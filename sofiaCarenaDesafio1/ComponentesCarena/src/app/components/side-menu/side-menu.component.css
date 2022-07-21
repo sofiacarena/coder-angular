@@ -1,0 +1,22 @@
+* {
+  background-color: #A5C9CA;
+ }
+
+.wrapper {
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+li:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: #355764;
+  font-weight: bold;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
