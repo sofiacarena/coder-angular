@@ -1,9 +1,41 @@
+* {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.students-list-container {
+  min-height: 45vh;
+}
+
+.students-list {
+  list-style: none;
+  padding: 0;
+  border: darkslategray 0.2px solid;
+  border-radius: 10px;
+}
+
+.student-item {
+  line-height: 1.55rem;
+  border-bottom: darkslategray 0.2px solid;
+}
+
+.student-item:last-child {
+  border-bottom: none;
+}
+
 .name-with-e {
-  color: darkblue;
-  font-size: 1.2rem;
-  font-weight: bold;
+  color: rgb(119, 48, 119);
+  font-size: 1.5rem;
 }
 .any-name {
   color: black;
   font-size: 1.2rem;
+}
+
+button {
+  padding: 0.5rem;
+  line-height: 1.2rem;
+  font-size: 1.125rem;
+  color: white;
+  border: none;
+  box-shadow: 1px 1px 0.5px grey;
 }

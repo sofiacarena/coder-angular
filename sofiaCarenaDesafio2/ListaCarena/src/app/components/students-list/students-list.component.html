@@ -1,8 +1,17 @@
-<ul>
-  <li *ngFor="let student of students" [style.background-color]="students.length > 4 ? 'grey' : 'white'">
-    <span [ngClass]="student.name.includes('e') ? 'name-with-e' : 'any-name'">
-      {{ student.name | lowercase }} {{ student.surname | uppercase}}
-    </span>
-  </li>
-</ul>
-<button (click)="handleClick()">{{ moreOrLessStudents }} estudiantes</button>
+<div class="col-4">
+  <div class="students-list-container my-3">
+    <ul class="students-list">
+      <li
+        *ngFor="let student of students"
+        [ngClass]="student.name.includes('e') ? 'name-with-e' : 'any-name'"
+        class="student-item p-2"
+      >
+          {{ student.name | lowercase }} {{ student.surname | uppercase}}
+
+      </li>
+    </ul>
+  </div>
+  <button [style.background-color]="students.length > 4 ? 'darkblue' : 'red'" (click)="handleClick()">
+    {{ moreOrLessStudents }} estudiantes
+  </button>
+</div>
