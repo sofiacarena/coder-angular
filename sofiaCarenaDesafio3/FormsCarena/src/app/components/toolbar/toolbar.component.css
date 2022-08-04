@@ -1,0 +1,17 @@
+* {
+  background-color: #355764;
+ }
+
+ ul {
+   list-style: none;
+ }
+
+ li:hover {
+   text-decoration: underline;
+ }
+
+ a {
+   color: beige;
+   font-weight: bold;
+   text-decoration: none;
+ }

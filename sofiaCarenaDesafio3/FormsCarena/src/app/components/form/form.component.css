@@ -1,0 +1,22 @@
+.input-label {
+  /* margin-right: 1rem; */
+  color: #355764;
+  font-weight: 600;
+  padding: 0;
+}
+
+input {
+  border: 1px solid #355764;
+  border-radius: 5px;
+}
+
+.alert {
+  font-size: 0,8rem;
+}
+
+
+button {
+  background-color: #355764;
+  color: white;
+  font-weight: bold;
+}
