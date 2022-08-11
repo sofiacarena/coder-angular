@@ -1,0 +1,25 @@
+* {
+  background-color: beige;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.title {
+  color: #355764;
+  width: fit-content;
+  font-size: 1.3rem;
+  text-align: center;
+  text-shadow: 1px 1px 2px #A5C9CA;
+}
+
+.add-button {
+  width: fit-content;
+  background-color: #A5C9CA;
+  color: #355764;
+
+  mat-icon {
+    background-color: #A5C9CA;
+  }
+}
