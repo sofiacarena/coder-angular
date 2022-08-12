@@ -15,7 +15,10 @@ import { ClassesComponent } from './components/classes/classes/classes.component
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { FullnameUppercasePipe } from './pipes/fullname-uppercase.pipe';
 import { GradeColorDirective } from './directives/grade-color.directive';
 import { HeaderSizeDirective } from './directives/header-size.directive';
@@ -42,7 +45,10 @@ import { HeaderSizeDirective } from './directives/header-size.directive';
     MatTableModule,
     MatIconModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

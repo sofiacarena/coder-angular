@@ -1,5 +1,7 @@
+@import "../../../../styles/variables.scss";
+
 * {
-  background-color: #A5C9CA;
+  background-color: $secondary-color;
  }
 
 .wrapper {
@@ -11,11 +13,11 @@ ul {
 }
 
 li:hover {
-  text-shadow: 1px 1px beige;
+  text-shadow: 1px 1px $main-background-color;
 }
 
 a {
-  color: #355764;
+  color: $primary-color;
   font-weight: 600;
   font-size: 1.1rem;
   text-decoration: none;

@@ -1,58 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Student } from 'src/app/models/students.module';
-
-const STUDENTS_DATA: Student[] = [
-  {
-    firstName: "Mike",
-    lastName: "Myers",
-    email: "mike.myers@gmail.com",
-    course: "Angular",
-    grade: 7
-  },
-  {
-    firstName: "Eddie",
-    lastName: "Murphy",
-    email: "emurphy@gmail.com",
-    course: "Desarrollo Web",
-    grade: 5
-  },
-  {
-    firstName: "Cameron",
-    lastName: "Díaz",
-    email: "princesa.fiona@gmail.com",
-    course: "Angular",
-    grade: 10
-  },
-  {
-    firstName: "John",
-    lastName: "Lithgow",
-    email: "thelord@gmail.com",
-    course: "React",
-    grade: 2
-  },
-  {
-    firstName: "Conrad",
-    lastName: "Vernon",
-    email: "conocesapinpon@gmail.com",
-    course: "Angular",
-    grade: 9
-  },
-  {
-    firstName: "Antonio",
-    lastName: "Banderas",
-    email: "boladepelos@gmail.com",
-    course: "Desarrollo Web",
-    grade: 8
-  },
-  {
-    firstName: "Rupert",
-    lastName: "Everett",
-    email: "encantador.everett@gmail.com",
-    course: "React",
-    grade: 3
-  },
-]
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Student, STUDENTS_DATA } from 'src/app/models/students.model';
+import { StudentsFormComponent } from './students-form/students-form.component';
 
 @Component({
   selector: 'app-students',
@@ -61,11 +11,47 @@ const STUDENTS_DATA: Student[] = [
 })
 export class StudentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
   }
 
   displayedColumns: string[] = ['fullname', 'email', 'course', 'grade', 'actions'];
   dataSource: MatTableDataSource<Student> = new MatTableDataSource(STUDENTS_DATA);
+  @ViewChild(MatTable) studentsTable!: MatTable<Student>;
+
+  addStudent(){
+    const dialogRef = this.dialog.open(StudentsFormComponent, {
+      width: '650px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res){
+        this.dataSource.data.push(res);
+        this.studentsTable.renderRows();
+      }
+    })
+  }
+
+  editStudent(element: Student){
+    const dialogRef = this.dialog.open(StudentsFormComponent, {
+      width: '700px',
+      data: element
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res){
+        const item = this.dataSource.data.find(student => student.email === res.email);
+        const index = this.dataSource.data.indexOf(item!);
+        this.dataSource.data[index] = res;
+        this.studentsTable.renderRows();
+      }
+    })
+  }
+
+  deleteStudent(element: Student){
+    this.dataSource.data = this.dataSource.data.filter((student: Student) => student.email != element.email);
+  }
 }
