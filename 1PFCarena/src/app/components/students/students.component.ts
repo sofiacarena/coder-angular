@@ -1,26 +1,45 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Student, STUDENTS_DATA } from 'src/app/models/students.model';
+import { map, Observable, Subscription } from 'rxjs';
+import { Student, TableStudent } from 'src/app/models/students.model';
 import { StudentsFormComponent } from './students-form/students-form.component';
+import { StudentsService } from '../../services/students.service';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss']
 })
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, OnDestroy {
+  displayedColumns$!: Observable<string[]>;
+  students: TableStudent[] = [];
+  subscription!: Subscription;
 
   constructor(
     private dialog: MatDialog,
+    private studentsService: StudentsService,
   ) { }
 
   ngOnInit(): void {
+    this.subscription = this.studentsService.getStudents()
+      .pipe(
+        map(student => ({
+          id: student.id,
+          fullname: `${student.firstName} ${student.lastName.toUpperCase()}`,
+          email: student.email,
+          course: student.course,
+          grade: student.grade,
+        }))
+      )
+      .subscribe((student) => {
+        this.students.push(student);
+      })
+    this.displayedColumns$ = this.studentsService.getStudentsTableColumns();
   }
 
-  displayedColumns: string[] = ['fullname', 'email', 'course', 'grade', 'actions'];
-  dataSource: MatTableDataSource<Student> = new MatTableDataSource(STUDENTS_DATA);
-  @ViewChild(MatTable) studentsTable!: MatTable<Student>;
+  dataSource: MatTableDataSource<TableStudent> = new MatTableDataSource(this.students);
+  @ViewChild(MatTable) studentsTable!: MatTable<TableStudent>;
 
   addStudent(){
     const dialogRef = this.dialog.open(StudentsFormComponent, {
@@ -35,15 +54,15 @@ export class StudentsComponent implements OnInit {
     })
   }
 
-  editStudent(element: Student){
+  editStudent(id: number){
     const dialogRef = this.dialog.open(StudentsFormComponent, {
       width: '700px',
-      data: element
+      data: id
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if(res){
-        const item = this.dataSource.data.find(student => student.email === res.email);
+        const item = this.dataSource.data.find(student => student.id === res.id);
         const index = this.dataSource.data.indexOf(item!);
         this.dataSource.data[index] = res;
         this.studentsTable.renderRows();
@@ -51,7 +70,11 @@ export class StudentsComponent implements OnInit {
     })
   }
 
-  deleteStudent(element: Student){
-    this.dataSource.data = this.dataSource.data.filter((student: Student) => student.email != element.email);
+  deleteStudent(element: TableStudent){
+    this.dataSource.data = this.dataSource.data.filter((student: TableStudent) => student.email != element.email);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -12,7 +12,7 @@
         <!-- Fullname Column -->
         <ng-container matColumnDef="fullname">
           <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-3"> Nombre completo </th>
-          <td mat-cell *matCellDef="let element"  class="col-3"> {{element | fullnameUppercase}} </td>
+          <td mat-cell *matCellDef="let element"  class="col-3"> {{element.fullname}} </td>
         </ng-container>
 
         <!-- Email Column -->
@@ -41,7 +41,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editStudent(element)">
+              <button mat-menu-item (click)="editStudent(element.id)">
                 <mat-icon>edit</mat-icon>
                 <span>Edit</span>
               </button>
@@ -53,8 +53,8 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="row"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async" class="row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns$ | async;" class="row"></tr>
       </table>
     </div>
   </div>
