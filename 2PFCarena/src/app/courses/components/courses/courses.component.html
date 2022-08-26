@@ -1,0 +1,67 @@
+<div class="container-fluid wrapper">
+  <div class="col py-5">
+    <div class="d-flex justify-content-between align-items-center mx-3 my-4">
+      <h1 class="title m-0">Cursos</h1>
+      <button mat-raised-button color="primary" class="add-button px-3 py-1" (click)="addCourse()">
+        <mat-icon>add</mat-icon>
+        Agregar Curso
+      </button>
+    </div>
+    <div class="w-100 my-4 px-4">
+      <table mat-table class="row" [dataSource]="dataSource">
+        <!-- Code Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-2"> Código </th>
+          <td mat-cell *matCellDef="let element"  class="col-2"> {{element.code}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-3"> Nombre </th>
+          <td mat-cell *matCellDef="let element"  class="col-3"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Teacher Column -->
+        <ng-container matColumnDef="teacher">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-3"> Profesor </th>
+          <td mat-cell *matCellDef="let element" class="col-3"> {{element.teacher}} </td>
+        </ng-container>
+
+        <!-- Students Column -->
+        <ng-container matColumnDef="noStudents">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-2"> Alumnos </th>
+          <td mat-cell *matCellDef="let element" class="col-2"> {{element.noStudents}} </td>
+        </ng-container>
+
+        <!-- Class Code Column -->
+        <ng-container matColumnDef="classCode">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-1"> Comisión </th>
+          <td mat-cell *matCellDef="let element" class="col-1"> {{element.classCode}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="col-1"></th>
+          <td mat-cell *matCellDef="let element" class="col-1">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editCourse(element)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="deleteCourse(element)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async" class="row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns$ | async;" class="row"></tr>
+      </table>
+    </div>
+  </div>
+</div>
