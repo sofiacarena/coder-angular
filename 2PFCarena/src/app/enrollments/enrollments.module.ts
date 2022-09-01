@@ -7,6 +7,7 @@ import { EnrollmentsFormComponent } from './components/enrollments-form/enrollme
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { MaterialModule } from '../shared/material.module';
     EnrollmentsFormComponent
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     EnrollmentsRoutingModule,
     MaterialModule,

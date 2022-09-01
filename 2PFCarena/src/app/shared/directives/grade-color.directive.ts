@@ -11,7 +11,7 @@ export class GradeColorDirective {
   ) {}
 
   ngOnInit(): void {
-    this.element.nativeElement.style.color = this.grade > 3 ? `green` : `red`;
+    this.element.nativeElement.style.color = this.grade > 39 ? `green` : `red`;
     this.element.nativeElement.style.fontWeight = '600';
   }
 }

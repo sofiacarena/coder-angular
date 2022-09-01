@@ -22,15 +22,19 @@ export class EnrollmentsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.enrollmentsService.getEnrollments()
-      .subscribe((enrollment) => {
-        this.enrollments.push(enrollment);
-      });
+    this.getEnrollments();
     this.displayedColumns$ = this.enrollmentsService.getEnrollmentsTableColumns();
   }
 
-  dataSource: MatTableDataSource<Enrollment> = new MatTableDataSource(this.enrollments);
+  dataSource = new MatTableDataSource<Enrollment>();
   @ViewChild(MatTable) enrollmentsTable!: MatTable<Enrollment>;
+
+  getEnrollments() {
+    this.subscription = this.enrollmentsService.getEnrollments()
+      .subscribe((enrollments) => {
+        this.dataSource.data = enrollments;
+      });
+  }
 
   addEnrollment(){
     const dialogRef = this.dialog.open(EnrollmentsFormComponent, {
@@ -39,8 +43,9 @@ export class EnrollmentsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res){
-        this.dataSource.data.push(res);
-        this.enrollmentsTable.renderRows();
+        this.enrollmentsService.addEnrollment(res).subscribe(
+          () => {this.getEnrollments()}
+        );
       }
     })
   }
@@ -53,16 +58,17 @@ export class EnrollmentsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res){
-        const item = this.dataSource.data.find(enrollment => enrollment.id === res.id);
-        const index = this.dataSource.data.indexOf(item!);
-        this.dataSource.data[index] = res;
-        this.enrollmentsTable.renderRows();
+        this.enrollmentsService.editEnrollment(res).subscribe(
+          () => {this.getEnrollments()}
+        );
       }
     })
   }
 
   deleteEnrollment(element: Enrollment){
-    this.dataSource.data = this.dataSource.data.filter((enrollment: Enrollment) => enrollment.id != element.id);
+    this.enrollmentsService.deleteEnrollment(element.id).subscribe(() => {
+      this.getEnrollments();
+    });
   }
 
   ngOnDestroy(): void {

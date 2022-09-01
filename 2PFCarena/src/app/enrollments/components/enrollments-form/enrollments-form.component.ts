@@ -46,7 +46,19 @@ export class EnrollmentsFormComponent implements OnInit {
   }
 
   onConfirm() {
-    this.dialogRef.close(this.enrollmentsForm.value);
+    if (this.data) {
+      const { student, course, classCode } = this.enrollmentsForm.value;
+      const editedEnrollment = {
+        id: this.data.id,
+        code: this.data.code,
+        course: course,
+        student: student,
+        classCode: classCode,
+      }
+      this.dialogRef.close(editedEnrollment);
+    } else {
+      this.dialogRef.close(this.enrollmentsForm.value);
+    }
   }
 
   onCancel() {

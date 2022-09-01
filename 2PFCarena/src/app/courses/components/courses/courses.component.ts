@@ -13,8 +13,7 @@ import { CoursesFormComponent } from '../courses-form/courses-form.component';
 })
 export class CoursesComponent implements OnInit, OnDestroy {
   displayedColumns$!: Observable<string[]>;
-  courses: Course[] = [];
-  subscription!: Subscription;
+  subscriptions!: Subscription;
 
   constructor(
     private dialog: MatDialog,
@@ -22,15 +21,19 @@ export class CoursesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.coursesService.getCourses()
-      .subscribe((course) => {
-        this.courses.push(course);
-      });
+    this.getCourses();
     this.displayedColumns$ = this.coursesService.getCoursesTableColumns();
   }
 
-  dataSource: MatTableDataSource<Course> = new MatTableDataSource(this.courses);
+  dataSource = new MatTableDataSource<Course>();
   @ViewChild(MatTable) coursesTable!: MatTable<Course>;
+
+  getCourses() {
+    this.subscriptions = this.coursesService.getCourses()
+      .subscribe((courses) => {
+        this.dataSource.data = courses;
+      });
+  }
 
   addCourse(){
     const dialogRef = this.dialog.open(CoursesFormComponent, {
@@ -39,8 +42,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res){
-        this.dataSource.data.push(res);
-        this.coursesTable.renderRows();
+        this.coursesService.addCourse(res).subscribe(
+          () => {this.getCourses()}
+        );
       }
     })
   }
@@ -53,20 +57,21 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(res => {
       if(res){
-        const item = this.dataSource.data.find(course => course.id === res.id);
-        const index = this.dataSource.data.indexOf(item!);
-        this.dataSource.data[index] = res;
-        this.coursesTable.renderRows();
+        this.coursesService.editCourse(res).subscribe(
+          () => {this.getCourses()}
+        );
       }
     })
   }
 
   deleteCourse(element: Course){
-    this.dataSource.data = this.dataSource.data.filter((course: Course) => course.id != element.id);
+    this.coursesService.deleteCourse(element.id).subscribe(() => {
+      this.getCourses();
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }
 

@@ -47,7 +47,20 @@ export class CoursesFormComponent implements OnInit {
   }
 
   onConfirm() {
-    this.dialogRef.close(this.coursesForm.value);
+    if (this.data) {
+      const { classCode, code, name, teacher } = this.coursesForm.value;
+      const editedCourse = {
+        id: this.data.id,
+        code: code,
+        name: name,
+        teacher: teacher,
+        noStudents: this.data.noStudents,
+        classCode: classCode,
+      }
+      this.dialogRef.close(editedCourse);
+    } else {
+      this.dialogRef.close(this.coursesForm.value);
+    }
   }
 
   onCancel() {

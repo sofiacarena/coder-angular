@@ -7,6 +7,7 @@ import { StudentsFormComponent } from './components/students-form/students-form.
 import { MaterialModule } from '../shared/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     StudentsFormComponent
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     StudentsRoutingModule,
     MaterialModule,

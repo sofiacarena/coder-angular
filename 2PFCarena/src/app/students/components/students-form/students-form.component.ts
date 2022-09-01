@@ -52,7 +52,16 @@ export class StudentsFormComponent implements OnInit {
   }
 
   onConfirm() {
-    this.dialogRef.close(this.studentsForm.value);
+    if (this.data) {
+      const editedStudent = {
+        id: this.data.id,
+        ...this.studentsForm.value
+      }
+      console.log(editedStudent);
+      this.dialogRef.close(editedStudent);
+    } else {
+      this.dialogRef.close(this.studentsForm.value);
+    }
   }
 
   onCancel() {
