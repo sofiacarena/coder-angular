@@ -1,0 +1,46 @@
+@import "../../../shared/styles/variables.scss";
+
+* {
+  font-size: 1.2rem;
+  box-sizing: border-box;
+}
+
+.card-container {
+  height: 100vh;
+  color: $main-background-color;
+}
+
+mat-card {
+  background-color: $primary-color;
+  min-height: 45%;
+}
+
+.input-label {
+  color: $main-background-color;
+  font-weight: bold;
+  padding: 0;
+}
+
+input {
+  line-height: 2rem;
+}
+
+.alert {
+  font-size: 1rem;
+}
+
+.alert.form-validation {
+  padding: 0.5rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.login-button {
+  line-height: 45px;
+}
+
+.mat-raised-button.mat-primary:not(.mat-button-disabled) {
+  background-color: $secondary-color;
+  color: $primary-color;
+  font-weight: bold;
+}

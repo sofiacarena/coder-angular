@@ -1,0 +1,23 @@
+@import "../../../shared/styles/variables.scss";
+
+.dialog-title {
+  color: $primary-color;
+  font-weight: 500;
+}
+
+::ng-deep .courses-form {
+  .mat-focused .mat-form-field-ripple {
+    background-color: $primary-color;
+  }
+  .mat-focused .mat-form-field-label {
+    color: $primary-color;
+  }
+}
+
+.mat-stroked-button.mat-primary {
+  color: $primary-color;
+}
+
+.mat-flat-button.mat-primary:not(.mat-button-disabled) {
+  background-color: $primary-color;
+}
