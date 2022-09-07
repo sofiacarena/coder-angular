@@ -61,32 +61,6 @@ fdescribe('StudentsFormComponent', () => {
     expect(form.invalid).toBeTrue();
   });
 
-  // it('should get ', () => {
-  //   const form = component.studentsForm;
-  //   const name = form.controls['firstName'];
-
-  //   name.setValue('Angular');
-
-  //   expect(form.invalid).toBeTrue();
-  // });
-
-  // getErrorMessage(field: string): string {
-  //   if(this.studentsForm.controls[field].errors?.['required']) {
-  //     return "El campo es requerido."
-  //   }
-  //   if(this.studentsForm.controls[field].errors?.['pattern']) {
-  //     return "La puntuación debe ser numérica."
-  //   }
-  //   if(this.studentsForm.controls[field].errors?.['email']) {
-  //     return "Formato inválido."
-  //   }
-  //   if(this.studentsForm.controls[field].errors?.['maxlength']) {
-  //     let length = field === 'course' ? 20 : 50;
-  //     return `Excediste el máximo de ${length} caracteres.`
-  //   }
-  //   return ""
-  // }
-
   it('should have form as valid when all required inputs are full', () => {
     const form = component.studentsForm;
 
