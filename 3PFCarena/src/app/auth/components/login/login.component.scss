@@ -7,18 +7,23 @@
 
 .card-container {
   height: 100vh;
-  color: $main-background-color;
 }
 
 mat-card {
-  background-color: $primary-color;
+  background-color: $secondary-color;
   min-height: 45%;
 }
 
-.input-label {
-  color: $main-background-color;
-  font-weight: bold;
-  padding: 0;
+::ng-deep .login-form {
+  .mat-form-field-flex {
+    background-color: $main-background-color;
+  }
+  .mat-focused .mat-form-field-ripple {
+    background-color: $primary-color;
+  }
+  .mat-focused .mat-form-field-label {
+    color: $primary-color;
+  }
 }
 
 input {
@@ -40,7 +45,7 @@ input {
 }
 
 .mat-raised-button.mat-primary:not(.mat-button-disabled) {
-  background-color: $secondary-color;
-  color: $primary-color;
+  background-color: $primary-color;
+  color: $secondary-color;
   font-weight: bold;
 }

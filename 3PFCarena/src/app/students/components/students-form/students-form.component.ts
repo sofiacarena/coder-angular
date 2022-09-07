@@ -57,7 +57,6 @@ export class StudentsFormComponent implements OnInit {
         id: this.data.id,
         ...this.studentsForm.value
       }
-      console.log(editedStudent);
       this.dialogRef.close(editedStudent);
     } else {
       this.dialogRef.close(this.studentsForm.value);
