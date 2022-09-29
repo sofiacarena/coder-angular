@@ -1,0 +1,65 @@
+<div class="container-fluid wrapper">
+  <div class="col py-5">
+    <div class="d-flex justify-content-between align-items-center mx-3 my-4">
+      <h1 class="title m-0">Inscripciones</h1>
+      <button mat-raised-button color="primary" class="add-button px-3 py-1" (click)="addEnrollment()">
+        <mat-icon>add</mat-icon>
+        Agregar Inscripción
+      </button>
+    </div>
+    <ng-container *ngIf="!(loading$ | async); else loading">
+    <div class="w-100 my-4 px-4">
+      <table mat-table class="row" [dataSource]="dataSource">
+
+        <!-- Student Column -->
+        <ng-container matColumnDef="student">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-4"> Alumno </th>
+          <td mat-cell *matCellDef="let element"  class="col-4"> {{element.student}} </td>
+        </ng-container>
+
+        <!-- Course Column -->
+        <ng-container matColumnDef="course">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-5"> Curso </th>
+          <td mat-cell *matCellDef="let element"  class="col-5"> {{element.course}} </td>
+        </ng-container>
+
+        <!-- Class Code Column -->
+        <ng-container matColumnDef="classCode">
+          <th mat-header-cell *matHeaderCellDef appHeaderSize class="col-2"> Comisión </th>
+          <td mat-cell *matCellDef="let element" class="col-2"> {{element.classCode}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="col-1"></th>
+          <td mat-cell *matCellDef="let element" class="col-1">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editEnrollment(element)">
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+              </button>
+              <button mat-menu-item (click)="deleteEnrollment(element)">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>Ver Detalle</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async" class="row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns$ | async;" class="row"></tr>
+      </table>
+    </div>
+    </ng-container>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </div>
+</div>

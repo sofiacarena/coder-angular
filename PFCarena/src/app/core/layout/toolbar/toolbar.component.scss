@@ -1,0 +1,13 @@
+@import "../../../shared/styles/variables.scss";
+
+* {
+  background-color: $primary-color;
+}
+
+.app-title {
+  color: $main-background-color;
+  line-height: 1.7rem;
+  font-size: 1rem;
+  font-weight: 500;
+  width: fit-content;
+}

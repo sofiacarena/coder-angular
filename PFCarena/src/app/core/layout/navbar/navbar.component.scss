@@ -1,0 +1,28 @@
+@import "../../../shared/styles/variables.scss";
+
+* {
+  background-color: $secondary-color;
+ }
+
+.wrapper {
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+li:last-child {
+  margin-top: 2rem;
+}
+
+li:hover {
+  text-shadow: 1px 1px $main-background-color;
+}
+
+a {
+  color: $primary-color;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+}

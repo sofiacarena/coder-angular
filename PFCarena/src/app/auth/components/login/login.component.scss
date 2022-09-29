@@ -1,0 +1,51 @@
+@import "../../../shared/styles/variables.scss";
+
+* {
+  font-size: 1.2rem;
+  box-sizing: border-box;
+}
+
+.card-container {
+  height: 100vh;
+}
+
+mat-card {
+  background-color: $secondary-color;
+  min-height: 45%;
+}
+
+::ng-deep .login-form {
+  .mat-form-field-flex {
+    background-color: $main-background-color;
+  }
+  .mat-focused .mat-form-field-ripple {
+    background-color: $primary-color;
+  }
+  .mat-focused .mat-form-field-label {
+    color: $primary-color;
+  }
+}
+
+input {
+  line-height: 2rem;
+}
+
+.alert {
+  font-size: 1rem;
+}
+
+.alert.form-validation {
+  padding: 0.5rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.login-button {
+  line-height: 45px;
+}
+
+.mat-raised-button.mat-primary:not(.mat-button-disabled) {
+  background-color: $primary-color;
+  color: $secondary-color;
+  font-weight: bold;
+}

@@ -1,0 +1,38 @@
+<div class="container p-4">
+  <h1 mat-dialog-title class="dialog-title">{{ dialogTitle }} Usuario</h1>
+  <div mat-dialog-content>
+    <form class="users-form px-2" [formGroup]="usersForm">
+      <div class="row pb-3">
+        <mat-form-field class="col-4" appearance="fill">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input formControlemail="username" matInput required>
+          <mat-error *ngIf="usersForm.controls['username'].invalid">{{ getErrorMessage('username') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-8" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input formControlemail="email" matInput required>
+          <mat-error *ngIf="usersForm.controls['email'].invalid">{{ getErrorMessage('email') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row pb-3">
+        <mat-form-field class="col-8" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input formControlemail="password" matInput required>
+          <mat-error *ngIf="usersForm.controls['password'].invalid">{{ getErrorMessage('password') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-4" appearance="fill">
+          <mat-label>Es un usuario Administrador?</mat-label>
+          <input formControlemail="admin" matInput required>
+          <mat-error *ngIf="usersForm.controls['admin'].invalid">{{ getErrorMessage('admin') }}</mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div class="d-flex px-2 justify-content-end" mat-dialog-actions>
+    <button mat-stroked-button class="cancel-button" color="primary" (click)="onCancel()">Cancelar</button>
+    <button mat-flat-button class="confirm-button" color="primary" [disabled]="usersForm.invalid" (click)="onConfirm()">{{ confirmButtonText }}</button>
+  </div>
+</div>
