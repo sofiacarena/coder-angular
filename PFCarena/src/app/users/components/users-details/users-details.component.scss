@@ -1,0 +1,11 @@
+@import "../../../shared/styles/variables.scss";
+
+.card-title, span {
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.mat-flat-button.mat-primary:not(.mat-button-disabled) {
+  background-color: $secondary-color;
+  color: $primary-color;
+}

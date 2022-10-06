@@ -8,9 +8,7 @@ import { User } from '../../shared/models/user.model';
 
 @Injectable()
 export class UsersEffects {
-
-
-  loadUserss$ = createEffect(() => this.actions$.pipe(
+  loadUsers$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.loadUsers),
     mergeMap(() => this.usersService.getUsers().pipe(
       map((u: User[]) => UsersActions.loadedUsers({users: u}))

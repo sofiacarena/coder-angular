@@ -9,6 +9,7 @@ import { UsersState } from '../../../shared/models/users.state';
 import { loadUsers } from '../../state/users.actions';
 import { selectLoadingUsersState, selectLoadedUsersState } from '../../state/users.selectors';
 import { UsersFormComponent } from '../users-form/users-form.component';
+import { UsersDetailsComponent } from '../users-details/users-details.component';
 
 @Component({
   selector: 'app-users',
@@ -64,6 +65,13 @@ export class UsersComponent implements OnInit {
         );
       }
     })
+  }
+
+  seeUserDetails(element: User){
+    const dialogRef = this.dialog.open(UsersDetailsComponent, {
+      width: '650px',
+      data: element.id
+    });
   }
 
   deleteUser(element: User){

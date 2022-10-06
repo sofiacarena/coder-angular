@@ -12,11 +12,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { EnrollmentsEffects } from './state/enrollments.effects';
 import * as fromEnrollments from './state/enrollments.reducer';
 import { StoreModule } from '@ngrx/store';
+import { EnrollmentsDetailsComponent } from './components/enrollments-details/enrollments-details.component';
 
 @NgModule({
   declarations: [
     EnrollmentsComponent,
-    EnrollmentsFormComponent
+    EnrollmentsFormComponent,
+    EnrollmentsDetailsComponent
   ],
   imports: [
     HttpClientModule,

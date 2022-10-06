@@ -1,7 +1,7 @@
 <div class="container wrapper">
   <div class="col">
     <ul class="p-2 pt-5">
-      <li *ngFor="let option of menuOptions" class="p-2"><a [routerLink]="option.link">{{ option.name }}</a></li>
+      <li *ngFor="let option of menuOptions" class="p-2"><a *ngIf="(adminUser$ | async) || option.link !== 'users'" [routerLink]="option.link">{{ option.name }}</a></li>
     </ul>
   </div>
 </div>

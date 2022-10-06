@@ -42,15 +42,15 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="editStudent(element)">
+                <button *ngIf="adminUser$ | async" mat-menu-item (click)="editStudent(element)">
                   <mat-icon>edit</mat-icon>
                   <span>Editar</span>
                 </button>
-                <button mat-menu-item (click)="deleteStudent(element)">
+                <button *ngIf="adminUser$ | async" mat-menu-item (click)="deleteStudent(element)">
                   <mat-icon>delete</mat-icon>
                   <span>Eliminar</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item (click)="seeStudentDetails(element)">
                   <mat-icon>visibility</mat-icon>
                   <span>Ver Detalle</span>
                 </button>

@@ -9,6 +9,7 @@ import { EnrollmentsState } from '../../../shared/models/enrollments.state';
 import { Store } from '@ngrx/store';
 import { loadEnrollments } from '../../state/enrollments.actions';
 import { selectLoadingEnrollmentsState, selectLoadedEnrollmentsState } from '../../state/enrollments.selectors';
+import { EnrollmentsDetailsComponent } from '../enrollments-details/enrollments-details.component';
 
 @Component({
   selector: 'app-enrollments',
@@ -64,6 +65,13 @@ export class EnrollmentsComponent implements OnInit {
         );
       }
     })
+  }
+
+  seeEnrollmentDetails(element: Enrollment){
+    const dialogRef = this.dialog.open(EnrollmentsDetailsComponent, {
+      width: '650px',
+      data: element.id
+    });
   }
 
   deleteEnrollment(element: Enrollment){

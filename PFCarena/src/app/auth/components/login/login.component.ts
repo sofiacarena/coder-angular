@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadSession } from 'src/app/state/actions/session.actions';
+import { AppState } from 'src/app/state/app.state';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -17,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private store: Store<AppState>,
     private router: Router,
     private fb: FormBuilder
   ) { }
@@ -32,7 +36,9 @@ export class LoginComponent implements OnInit {
     this.authService.getUsers().subscribe((students) => {
       let loggedUser = students.find(student => student.username === userFormData.username && student.password === userFormData.password);
       if (loggedUser) {
-        this.authService.openSession(loggedUser);
+        this.store.dispatch(loadSession({
+          activeUser: loggedUser
+        }));
         this.router.navigate(['']);
         this.loginFailed = false;
       } else {

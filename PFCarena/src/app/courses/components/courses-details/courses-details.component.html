@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="card-title">Curso {{ selectedCourse.name }} {{selectedCourse.classCode}}</mat-card-title>
+    <mat-card-subtitle>Detalles</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><span>Nombre del curso</span> {{selectedCourse.name}}</p>
+    <p><span>Código de la comisión</span> {{selectedCourse.classCode}}</p>
+    <p><span>Profesor</span> {{selectedCourse.teacher}}</p>
+    <p><span>Cantidad de alumnos</span> {{selectedCourse.students.length}}</p>
+    <p><span>Fecha de creación</span> {{selectedCourse.createdAt | date: 'dd/MM/yyyy'}}</p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-flat-button class="ok-button" color="primary" (click)="onClose()">
+      Ok
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -9,6 +9,9 @@ import { StudentsState } from 'src/app/shared/models/students.state';
 import { Store } from '@ngrx/store';
 import { selectLoadingStudentsState, selectLoadedStudentsState } from '../../state/students.selectors';
 import { loadStudents } from '../../state/students.actions';
+import { StudentsDetailsComponent } from '../students-details/students-details.component';
+import { AppState } from 'src/app/state/app.state';
+import { selectAdminUserState } from 'src/app/state/selectors/session.selectors';
 
 @Component({
   selector: 'app-students',
@@ -16,15 +19,19 @@ import { loadStudents } from '../../state/students.actions';
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit {
+  adminUser$: Observable<boolean | undefined>;
   displayedColumns$!: Observable<string[]>;
   loading$!: Observable<boolean>;
   dataSource!: MatTableDataSource<Student>;
 
   constructor(
     private store: Store<StudentsState>,
+    private sessionStore: Store<AppState>,
     private dialog: MatDialog,
     private studentsService: StudentsService,
-  ) { }
+  ) {
+    this.adminUser$ = this.sessionStore.select(selectAdminUserState);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(loadStudents());
@@ -64,6 +71,17 @@ export class StudentsComponent implements OnInit {
         );
       }
     })
+  }
+
+  seeStudentDetails(element: Student){
+    const dialogRef = this.dialog.open(StudentsDetailsComponent, {
+      width: '650px',
+      data: element.id
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.store.dispatch(loadStudents());
+    });
   }
 
   deleteStudent(element: Student){

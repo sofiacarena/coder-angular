@@ -11,13 +11,15 @@ import { MaterialModule } from '../shared/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import * as fromUsers from './state/users.reducer'
+import * as fromUsers from './state/users.reducer';
+import { UsersDetailsComponent } from './components/users-details/users-details.component'
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    UsersDetailsComponent
   ],
   imports: [
     CommonModule,

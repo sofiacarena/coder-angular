@@ -12,12 +12,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromCourses from './state/courses.reducer';
 import { CoursesEffects } from './state/courses.effects';
+import { CoursesDetailsComponent } from './components/courses-details/courses-details.component';
 
 
 @NgModule({
   declarations: [
     CoursesComponent,
-    CoursesFormComponent
+    CoursesFormComponent,
+    CoursesDetailsComponent
   ],
   imports: [
     HttpClientModule,

@@ -11,12 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StudentsEffects } from './state/students.effects';
 import { StoreModule } from '@ngrx/store';
-import * as fromStudents from './state/students.reducer'
+import * as fromStudents from './state/students.reducer';
+import { StudentsDetailsComponent } from './components/students-details/students-details.component'
 
 @NgModule({
   declarations: [
     StudentsComponent,
-    StudentsFormComponent
+    StudentsFormComponent,
+    StudentsDetailsComponent
   ],
   imports: [
     HttpClientModule,

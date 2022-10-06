@@ -12,10 +12,6 @@ ul {
   list-style: none;
 }
 
-li:last-child {
-  margin-top: 2rem;
-}
-
 li:hover {
   text-shadow: 1px 1px $main-background-color;
 }

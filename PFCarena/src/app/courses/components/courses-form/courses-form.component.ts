@@ -26,7 +26,6 @@ export class CoursesFormComponent implements OnInit {
 
   createForm() {
     this.coursesForm = this.fb.group({
-      code: new FormControl(this.data ? this.data.code : "", [Validators.required, Validators.pattern(this.onlyNumbersRegEx)]),
       name: new FormControl(this.data ? this.data.name : "", [Validators.required, Validators.maxLength(100)]),
       teacher: new FormControl(this.data ? this.data.teacher : "", [Validators.required, Validators.maxLength(100)]),
       classCode: new FormControl(this.data ? this.data.classCode : "", [Validators.required, Validators.pattern(this.onlyNumbersRegEx)]),
@@ -48,13 +47,12 @@ export class CoursesFormComponent implements OnInit {
 
   onConfirm() {
     if (this.data) {
-      const { classCode, code, name, teacher } = this.coursesForm.value;
+      const { classCode, name, teacher } = this.coursesForm.value;
       const editedCourse = {
         id: this.data.id,
-        code: code,
         name: name,
         teacher: teacher,
-        noStudents: this.data.noStudents,
+        students: this.data.students,
         classCode: classCode,
       }
       this.dialogRef.close(editedCourse);

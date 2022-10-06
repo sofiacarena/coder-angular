@@ -1,12 +1,12 @@
 <div class="container p-4">
-  <h1 mat-dialog-title class="dialog-title">{{ dialogTitle }} Estudiante</h1>
+  <h1 mat-dialog-title class="dialog-title">{{ dialogTitle }} Curso</h1>
   <div mat-dialog-content>
     <form class="courses-form px-2" [formGroup]="coursesForm">
       <div class="row pb-3">
         <mat-form-field class="col-4" appearance="fill">
-          <mat-label>Código</mat-label>
-          <input formControlName="code" matInput required>
-          <mat-error *ngIf="coursesForm.controls['code'].invalid">{{ getErrorMessage('code') }}</mat-error>
+          <mat-label>Comisión</mat-label>
+          <input formControlName="classCode" matInput required>
+          <mat-error *ngIf="coursesForm.controls['classCode'].invalid">{{ getErrorMessage('classCode') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="col-8" appearance="fill">
@@ -21,12 +21,6 @@
           <mat-label>Profesor</mat-label>
           <input formControlName="teacher" matInput required>
           <mat-error *ngIf="coursesForm.controls['teacher'].invalid">{{ getErrorMessage('teacher') }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="col-4" appearance="fill">
-          <mat-label>Comisión</mat-label>
-          <input formControlName="classCode" matInput required>
-          <mat-error *ngIf="coursesForm.controls['classCode'].invalid">{{ getErrorMessage('classCode') }}</mat-error>
         </mat-form-field>
       </div>
     </form>

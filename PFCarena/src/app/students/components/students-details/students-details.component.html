@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="card-title">Alumno {{selectedStudent.firstName}} {{selectedStudent.lastName}}</mat-card-title>
+    <mat-card-subtitle>Detalles</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><span>Nombre completo</span> {{selectedStudent.firstName}} {{selectedStudent.lastName}}</p>
+    <p><span>Email</span> {{selectedStudent.email}}</p>
+    <p><span>Fecha de creación</span> {{selectedStudent.createdAt | date: 'dd/MM/yyyy'}}</p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-flat-button class="ok-button" color="primary" (click)="onClose()">
+      Ok
+    </button>
+  </mat-card-actions>
+</mat-card>

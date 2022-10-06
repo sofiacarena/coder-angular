@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <img *ngIf="selectedUser.avatar" mat-card-avatar [src]="selectedUser.avatar">
+    <mat-card-title class="card-title">Usuario {{selectedUser.username}}</mat-card-title>
+    <mat-card-subtitle>Detalles</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><span>Nombre completo</span> {{selectedUser.fullname}}</p>
+    <p><span>Email</span> {{selectedUser.email}}</p>
+    <p><span>¿Es Admin?</span> {{selectedUser.admin ? "Si" : "No"}}</p>
+    <p><span>Fecha de creación</span> {{selectedUser.createdAt | date: 'dd/MM/yyyy'}}</p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-flat-button class="ok-button" color="primary" (click)="onClose()">
+      Ok
+    </button>
+  </mat-card-actions>
+</mat-card>

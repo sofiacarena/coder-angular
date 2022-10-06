@@ -9,6 +9,9 @@ import { CoursesService } from '../../../shared/services/courses.service';
 import { selectLoadedCoursesState, selectLoadingCoursesState } from '../../state/courses.selectors';
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
 import { loadCourses } from '../../state/courses.actions';
+import { CoursesDetailsComponent } from '../courses-details/courses-details.component';
+import { AppState } from 'src/app/state/app.state';
+import { selectAdminUserState } from 'src/app/state/selectors/session.selectors';
 
 @Component({
   selector: 'app-courses',
@@ -16,15 +19,19 @@ import { loadCourses } from '../../state/courses.actions';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
+  adminUser$: Observable<boolean | undefined>;
   loading$!: Observable<boolean>;
   displayedColumns$!: Observable<string[]>;
   dataSource!: MatTableDataSource<Course>;
 
   constructor(
     private store: Store<CoursesState>,
+    private sessionStore: Store<AppState>,
     private dialog: MatDialog,
     private coursesService: CoursesService,
-  ) { }
+  ) {
+    this.adminUser$ = this.sessionStore.select(selectAdminUserState);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(loadCourses());
@@ -63,6 +70,17 @@ export class CoursesComponent implements OnInit {
           () => { this.store.dispatch(loadCourses()) }
         );
       }
+    })
+  }
+
+  seeCourseDetails(element: Course){
+    const dialogRef = this.dialog.open(CoursesDetailsComponent, {
+      width: '650px',
+      data: element.id
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.store.dispatch(loadCourses());
     })
   }
 
